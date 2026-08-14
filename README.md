@@ -1,4 +1,4 @@
-# Ocella
+# Ocelle
 
 Framework d'apprentissage d'alphabets (React Native + Expo Router + TypeScript + Zustand).
 
