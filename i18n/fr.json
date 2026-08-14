@@ -1,0 +1,39 @@
+{
+  "app": { "title": "Alpha Trainer" },
+  "alphabets": {
+    "jpHiragana": "Hiragana",
+    "jpKatakana": "Katakana",
+    "jpKanji": "Kanji",
+    "krHangul": "Hangul"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "autoCheck": "Correction automatique",
+    "randomMode": "Mode aléatoire direct",
+    "fontKana": "Police (caractères)",
+    "fontLatin": "Police (romaji)",
+    "appLanguage": "Langue de l'application",
+    "unsavedTitle": "Voulez-vous enregistrer les modifications ?",
+    "cancel": "Annuler",
+    "closeWithoutSaving": "Fermer sans enregistrer",
+    "save": "Enregistrer"
+  },
+  "quiz": {
+    "ok": "OK",
+    "expectedAnswer": "Réponse attendue : {{expected}}",
+    "yourAnswer": "Votre réponse : {{given}}",
+    "placeholder": "Votre réponse"
+  },
+  "radar": { "title": "Progression" },
+  "profile": {
+    "title": "Profil",
+    "mastery": "Maîtrise par alphabet",
+    "dailyChallenges": "Défis du jour"
+  },
+  "challenges": {
+    "hiragana": "Réussir tous les hiragana",
+    "katakana": "Réussir tous les katakana",
+    "kanji30": "30 kanji débloqués aléatoires",
+    "claim": "Réclamer"
+  }
+}
