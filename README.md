@@ -11,9 +11,6 @@ w
 npx expo install react-native-web react-dom
 ```
 
-⚠️ Il manque les fichiers `.ttf` réels dans `assets/fonts/` (voir le README de
-ce dossier) — je n'avais pas d'accès réseau pour les télécharger.
-
 ## Nouveautés de cette itération
 
 - **Header persistant** (`components/AppHeader.tsx`) : le bouton ⚙️ est visible sur tous les écrans, y compris pendant le quiz, avec un bouton retour — plus moyen de rester coincé dans une session.
