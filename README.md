@@ -1,4 +1,4 @@
-# Alpha Trainer
+# Ocelle
 
 Framework d'apprentissage d'alphabets (React Native + Expo Router + TypeScript + Zustand).
 
@@ -10,9 +10,6 @@ npx expo start
 w
 npx expo install react-native-web react-dom
 ```
-
-⚠️ Il manque les fichiers `.ttf` réels dans `assets/fonts/` (voir le README de
-ce dossier) — je n'avais pas d'accès réseau pour les télécharger.
 
 ## Nouveautés de cette itération
 
