@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const STORAGE_KEY = 'alpha-trainer.xp';
+const STORAGE_KEY = 'ocelle.xp';
 
 type XpState = {
   totalXp: number;
@@ -21,7 +21,7 @@ export const useXp = create<XpState>((set, get) => ({
   },
 
   // Si uniqueKey est fourni, l'XP n'est accordée qu'une seule fois pour cette clé
-  // (ex: "mastery-jp-hiragana", "daily-2026-08-09-katakana").
+  // (ex: "mastery-jpn-hiragana", "daily-2026-08-09-katakana").
   awardXp: async (amount: number, uniqueKey?: string) => {
     const { totalXp, claimedKeys } = get();
     if (uniqueKey && claimedKeys.includes(uniqueKey)) return false;

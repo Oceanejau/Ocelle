@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from 'react';
-import { AlphabetDefinition, getEntryAnswer, getEntryChar } from '../data/types';
+import { QuizEntry, getEntryAnswer, getEntryChar } from '../data/types';
 import { useProgress } from '../store/useProgress';
 import { useDailyChallenges } from '../store/useDailyChallenges';
 import { useXp } from '../store/useXp';
@@ -11,68 +11,39 @@ import { MASTERY_THRESHOLD, MASTERY_XP_REWARD } from '../utils/mastery';
 type FeedbackState = 'idle' | 'correct' | 'incorrect';
 
 export function useQuizSession(
-  alphabet: AlphabetDefinition,
+  alphabetId: string,
+  entries: QuizEntry[],
   autoCheck: boolean,
   forceRandom: boolean
 ) {
-  const { recordAnswer, getKnownCharCount } = useProgress();
-
+  const { recordAnswer, hasAnsweredCorrectly } = useProgress();
   const [index, setIndex] = useState(0);
+  const [questionNumber, setQuestionNumber] = useState(0);
   const [inputValue, setInputValue] = useState('');
   const [feedback, setFeedback] = useState<FeedbackState>('idle');
-
   const attemptsRef = useRef(0);
   const startedAtRef = useRef(Date.now());
-  const submittingRef = useRef(false);
 
-  const entry = useMemo(
-    () => alphabet.entries[index],
-    [alphabet, index]
-  );
-
-  const tutorialDone =
-    getKnownCharCount(alphabet.id) >= alphabet.entries.length;
-
+  const entry = useMemo(() => entries[index], [entries, index]);
+  const tutorialDone = entries.every((e) => hasAnsweredCorrectly(alphabetId, getEntryChar(e)));
   const isRandom = forceRandom || tutorialDone;
 
   function goToNext() {
     attemptsRef.current = 0;
     startedAtRef.current = Date.now();
-
     setInputValue('');
     setFeedback('idle');
-
-    setIndex((prev) =>
-      pickNextIndex(prev, alphabet.entries.length, isRandom)
-    );
-
-    submittingRef.current = false;
+    setQuestionNumber((n) => n + 1);
+    setIndex((prev) => pickNextIndex(prev, entries.length, isRandom));
   }
 
-  async function submitAnswer(answer?: string) {
-    if (submittingRef.current) {
-      return;
-    }
-
-    const answerToCheck = answer ?? inputValue;
-
-    if (!answerToCheck.trim()) {
-      return;
-    }
-
-    submittingRef.current = true;
-
+  async function evaluateAnswer(givenValue: string) {
     attemptsRef.current += 1;
-
-    const isCorrect = checkAnswer(
-      getEntryAnswer(entry),
-      answerToCheck
-    );
-
+    const isCorrect = checkAnswer(getEntryAnswer(entry), givenValue);
     setFeedback(isCorrect ? 'correct' : 'incorrect');
 
     await recordAnswer({
-      alphabetId: alphabet.id,
+      alphabetId,
       char: getEntryChar(entry),
       correct: isCorrect,
       attempts: attemptsRef.current,
@@ -82,55 +53,27 @@ export function useQuizSession(
 
     if (isCorrect) {
       const level = computeLevel(useXp.getState().totalXp);
+      await useDailyChallenges.getState().recordCorrectChar(alphabetId, getEntryChar(entry), level);
 
-      await useDailyChallenges
-        .getState()
-        .recordCorrectChar(
-          alphabet.id,
-          getEntryChar(entry),
-          level
-        );
-
-      const successRate =
-        useProgress.getState().getSuccessRate(alphabet.id);
-
+      const successRate = useProgress.getState().getSuccessRate(alphabetId);
       if (successRate >= MASTERY_THRESHOLD) {
-        await useXp
-          .getState()
-          .awardXp(
-            MASTERY_XP_REWARD,
-            `mastery-${alphabet.id}`
-          );
+        await useXp.getState().awardXp(MASTERY_XP_REWARD, `mastery-${alphabetId}`);
       }
 
       setTimeout(goToNext, 500);
-    } else {
-      // Permet une nouvelle tentative
-      submittingRef.current = false;
     }
+  }
+
+  function submitAnswer() {
+    evaluateAnswer(inputValue);
   }
 
   function handleChangeText(text: string) {
     setInputValue(text);
-
-    if (
-      autoCheck &&
-      checkAnswer(getEntryAnswer(entry), text)
-    ) {
-      // IMPORTANT :
-      // on passe directement "text" à submitAnswer()
-      // au lieu d'attendre que inputValue soit mis à jour.
-      submitAnswer(text);
+    if (autoCheck && checkAnswer(getEntryAnswer(entry), text)) {
+      evaluateAnswer(text);
     }
   }
 
-  return {
-    entry,
-    inputValue,
-    feedback,
-    handleChangeText,
-    submitAnswer,
-    isRandom,
-  };
+  return { entry, inputValue, feedback, handleChangeText, submitAnswer, isRandom, questionNumber };
 }
-

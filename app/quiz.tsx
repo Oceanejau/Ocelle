@@ -11,9 +11,12 @@ import QuizFeedback from '../components/QuizFeedback';
 import QuizInput from '../components/QuizInput';
 import AppHeader from '../components/AppHeader';
 import SettingsModal from '../components/SettingsModal';
+import AutoCheckTipBubble from '../components/AutoCheckTipBubble';
 
 export default function QuizScreen() {
-  const { alphabetId } = useLocalSearchParams<{ alphabetId: string }>();
+  const { alphabetId, cycleStart, cycleEnd } = useLocalSearchParams<{
+    alphabetId: string; cycleStart?: string; cycleEnd?: string;
+  }>();
   const alphabet = getAlphabetById(alphabetId);
   const { settings } = useSettings();
   const { t } = useI18n();
@@ -22,27 +25,26 @@ export default function QuizScreen() {
 
   if (!alphabet) return null;
 
-  const { entry, inputValue, feedback, handleChangeText, submitAnswer } =
-    useQuizSession(alphabet, settings.autoCheck, settings.randomMode);
+  const entries = cycleStart != null && cycleEnd != null
+    ? alphabet.entries.slice(Number(cycleStart), Number(cycleEnd))
+    : alphabet.entries;
+
+  const { entry, inputValue, feedback, handleChangeText, submitAnswer, questionNumber } =
+    useQuizSession(alphabet.id, entries, settings.autoCheck, settings.randomMode);
+
+  const displayFontFamily = alphabet.forcedFontFamily ?? getFontFamily(settings.fontId);
 
   return (
     <View style={styles.container}>
-      <AppHeader
-        onOpenSettings={() => setSettingsOpen(true)}
-        onBack={() => {
-          if (router.canGoBack()) {
-            router.back();
-          } else {
-            router.replace('/');
-          }
-        }}
-      />
+      <AppHeader onOpenSettings={() => setSettingsOpen(true)} onBack={() => router.back()} />
       <SettingsModal visible={settingsOpen} onClose={() => setSettingsOpen(false)} />
+      <AutoCheckTipBubble />
+
       <View style={{ flex: 2 }} />
       <View style={{ flex: 3, justifyContent: 'center', alignItems: 'center' }}>
         <QuizFeedback
           char={getEntryChar(entry)}
-          fontFamily={getFontFamily(settings.fontId)}
+          fontFamily={displayFontFamily}
           state={feedback}
           expectedLabel={t('quiz.expectedAnswer', { expected: getEntryAnswer(entry) })}
           givenLabel={t('quiz.yourAnswer', { given: inputValue })}
@@ -58,6 +60,7 @@ export default function QuizScreen() {
           placeholder={t('quiz.placeholder')}
           okLabel={t('quiz.ok')}
           fontFamily={getFontFamily(settings.fontIdLatin)}
+          focusKey={questionNumber}
         />
       </View>
       <View style={{ flex: 1 }} />

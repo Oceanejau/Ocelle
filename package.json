@@ -1,5 +1,5 @@
 {
-  "name": "alpha-trainer",
+  "name": "ocelle",
   "version": "1.0.0",
   "main": "expo-router/entry",
   "scripts": {
@@ -8,8 +8,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "predeploy": "expo export -p web",
-    "deploy": "gh-pages -d dist"
-  },
+    "deploy": "gh-pages --nojekyll -d dist"
+  }
+,
   "dependencies": {
     "@react-native-async-storage/async-storage": "1.23.1",
     "expo": "~51.0.0",
@@ -20,15 +21,15 @@
     "expo-router": "~3.5.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-native": "0.74.0",
+    "react-native": "0.74.5",
     "react-native-svg": "15.2.0",
     "react-native-web": "~0.19.10",
     "zustand": "^4.5.0"
   },
   "devDependencies": {
-    "typescript": "^5.3.0",
     "@types/react": "~18.2.0",
-    "gh-pages": "^6.1.1"
+    "gh-pages": "^6.1.1",
+    "typescript": "~5.3.3"
   },
   "private": true
 }

@@ -1,3 +1,6 @@
+.env
+.note
+
 # Dependencies
 node_modules/
 

@@ -5,6 +5,7 @@ import { useI18n } from '../store/useI18n';
 import FontSelector from './FontSelector';
 import LanguageSelector from './LanguageSelector';
 import UnsavedChangesDialog from './UnsavedChangesDialog';
+import CloudSyncSection from './CloudSyncSection';
 
 type Props = {
   visible: boolean;
@@ -75,6 +76,7 @@ export default function SettingsModal({ visible, onClose }: Props) {
               value={draft.appLanguage}
               onChange={(lang) => updateDraft('appLanguage', lang)}
             />
+            <CloudSyncSection />
           </ScrollView>
         </Pressable>
       </Pressable>

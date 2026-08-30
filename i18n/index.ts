@@ -1,10 +1,10 @@
-import fr from './fr.json';
-import en from './en.json';
-import jp from './jp.json';
+import fra from './fra.json';
+import eng from './eng.json';
+import jpn from './jpn.json';
 
-export type AppLanguage = 'fr' | 'en' | 'jp';
+export type AppLanguage = 'fra' | 'eng' | 'jpn';
 
-const dictionaries: Record<AppLanguage, any> = { fr, en, jp };
+const dictionaries: Record<AppLanguage, any> = { fra, eng, jpn };
 
 function resolveKey(dict: any, key: string): string | undefined {
   return key.split('.').reduce((acc, part) => (acc ? acc[part] : undefined), dict);

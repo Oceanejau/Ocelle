@@ -1,0 +1,65 @@
+{
+  "app": { "title": "アルファトレーナー" },
+  "alphabets": {
+    "jpnHiragana": "ひらがな",
+    "jpnKatakana": "カタカナ",
+    "jpnKanji": "漢字",
+    "korHangul": "ハングル",
+    "hit": "ヒッタイト語"
+  },
+  "settings": {
+    "title": "設定",
+    "autoCheck": "自動採点",
+    "randomMode": "最初からランダム出題",
+    "fontKana": "フォント（文字）",
+    "fontLatin": "フォント（ローマ字）",
+    "appLanguage": "アプリの言語",
+    "unsavedTitle": "変更を保存しますか？",
+    "cancel": "キャンセル",
+    "closeWithoutSaving": "保存せずに閉じる",
+    "save": "保存",
+    "cloudSync": "Sauvegarde Google Drive",
+    "connectDrive": "Se connecter à Google Drive",
+    "disconnect": "Déconnexion Google Drive",
+    "syncStatus": "Statut de la synchronisation",
+    "synced": "Synchronisé",
+    "syncing": "Synchronisation...",
+    "lastSync": "Dernière synchronisation",
+    "syncNow": "Synchroniser maintenant"
+  },
+  "quiz": {
+    "ok": "OK",
+    "expectedAnswer": "正解：{{expected}}",
+    "yourAnswer": "あなたの答え：{{given}}",
+    "placeholder": "答えを入力",
+    "autoCheckTip": "Astuce : active la correction automatique dans les paramètres ⚙️ pour valider chaque réponse sans appuyer sur OK."
+  },
+  "radar": { "title": "進捗" },
+  "profile": {
+    "title": "プロフィール",
+    "mastery": "アルファベット別習熟度",
+    "dailyChallenges": "デイリーチャレンジ"
+  },
+  "challenges": {
+    "hiragana": "ひらがなをすべて正解",
+    "katakana": "カタカナをすべて正解",
+    "kanji30": "解放済み漢字からランダム30問",
+    "claim": "受け取る"
+  },
+  "tutorial": {
+    "title": "始める前に",
+    "start": "クイズを始める",
+    "hittite": "このアプリにはまだ完全なヒッタイト楔形文字フォントがありません。ここではヒッタイト学者が使う学術的な翻字（a, e, i, u）を学びます。楔形数字は縦の楔（𒁹）を1から9まで繰り返して書きます。"
+  },
+  "languages": {
+    "jpn": "Japonais",
+    "kor": "Coréen",
+    "hit": "Hittite"
+  },
+  "learn": {
+    "reads": "Se lit",
+    "meaning": "Signification",
+    "next": "Suivant",
+    "startQuiz": "Commencer le quiz"
+  }
+}

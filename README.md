@@ -2,6 +2,8 @@
 
 Framework d'apprentissage d'alphabets (React Native + Expo Router + TypeScript + Zustand).
 
+Try it here: https://oceanejau.github.io/Ocelle/
+
 ## Lancer le projet
 
 ```bash
@@ -57,7 +59,7 @@ Toutes les valeurs numériques (XP par défi, seuil de maîtrise, taille des tra
 3. Créer `data/<code>/alphabet.ts` qui exporte un `LanguageModule` regroupant
    ces alphabets (copier `data/kr/alphabet.ts` comme modèle).
 4. Ajouter ce module dans `data/registry.ts`.
-5. Ajouter les clés `alphabets.xxx` dans `i18n/fr.json`, `en.json`, `jp.json`.
+5. Ajouter les clés `alphabets.xxx` dans `i18n/fra.json`, `eng.json`, `jpn.json` en utilisant l'ISO 639-3 pour noms de langues.
 
 Aucune autre partie de l'app (écrans, quiz, radar, cartes) n'a besoin d'être
 modifiée : elles lisent toutes `getAllAlphabets()` / `getAlphabetById()`.

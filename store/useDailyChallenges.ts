@@ -4,7 +4,7 @@ import { dailyChallengeTemplates, getTodayTargetChars } from '../data/challenges
 import { getTodayDateSeed } from '../utils/today';
 import { useXp } from './useXp';
 
-const STORAGE_KEY = 'alpha-trainer.daily-challenges';
+const STORAGE_KEY = 'ocelle.daily-challenges';
 
 type DailyState = {
   date: string;

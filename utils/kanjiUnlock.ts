@@ -1,4 +1,4 @@
-import { kanjiEntries } from '../data/jp/kanji';
+import { kanjiEntries } from '../data/jpn/kanji';
 
 const KANJI_PER_TIER = 50;
 

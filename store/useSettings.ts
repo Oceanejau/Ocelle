@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AppLanguage } from '../i18n';
 import { detectDeviceLanguage } from '../utils/detectLanguage';
 
-const STORAGE_KEY = 'alpha-trainer.settings';
+const STORAGE_KEY = 'ocelle.settings';
 
 export type Settings = {
   autoCheck: boolean;

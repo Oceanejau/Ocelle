@@ -1,0 +1,65 @@
+{
+  "app": { "title": "Ocelle" },
+  "alphabets": {
+    "jpnHiragana": "Hiragana",
+    "jpnKatakana": "Katakana",
+    "jpnKanji": "Kanji",
+    "korHangul": "Hangul",
+    "hit": "Hittite"
+  },
+  "settings": {
+    "title": "Settings",
+    "autoCheck": "Auto-check",
+    "randomMode": "Jump straight to random mode",
+    "fontKana": "Font (characters)",
+    "fontLatin": "Font (romaji)",
+    "appLanguage": "App language",
+    "unsavedTitle": "Do you want to save your changes?",
+    "cancel": "Cancel",
+    "closeWithoutSaving": "Close without saving",
+    "save": "Save",
+    "cloudSync": "Sauvegarde Google Drive",
+    "connectDrive": "Se connecter à Google Drive",
+    "disconnect": "Déconnexion Google Drive",
+    "syncStatus": "Statut de la synchronisation",
+    "synced": "Synchronisé",
+    "syncing": "Synchronisation...",
+    "lastSync": "Dernière synchronisation",
+    "syncNow": "Synchroniser maintenant"
+  },
+  "quiz": {
+    "ok": "OK",
+    "expectedAnswer": "Expected answer: {{expected}}",
+    "yourAnswer": "Your answer: {{given}}",
+    "placeholder": "Your answer",
+    "autoCheckTip": "Astuce : active la correction automatique dans les paramètres ⚙️ pour valider chaque réponse sans appuyer sur OK."
+  },
+  "radar": { "title": "Progress" },
+  "profile": {
+    "title": "Profile",
+    "mastery": "Mastery by alphabet",
+    "dailyChallenges": "Daily challenges"
+  },
+  "challenges": {
+    "hiragana": "Clear all hiragana",
+    "katakana": "Clear all katakana",
+    "kanji30": "30 random unlocked kanji",
+    "claim": "Claim"
+  },
+  "tutorial": {
+    "title": "Before you start",
+    "start": "Start the quiz",
+    "hittite": "Hittite doesn't have a full cuneiform font in the app yet: here you'll learn the scholarly transliteration used by Hittitologists. Vowels read a, e, i, u. Cuneiform numbers are written by repeating the vertical wedge (𒁹): once for 1, twice for 2, up to 9."
+  },
+  "languages": {
+    "jpn": "Japonais",
+    "kor": "Coréen",
+    "hit": "Hittite"
+  },
+  "learn": {
+    "reads": "Se lit",
+    "meaning": "Signification",
+    "next": "Suivant",
+    "startQuiz": "Commencer le quiz"
+  }
+}

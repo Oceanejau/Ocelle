@@ -1,10 +1,9 @@
 import { AlphabetDefinition, LanguageModule } from './types';
-import { jpModule } from './jp/alphabet';
-import { krModule } from './kr/alphabet';
+import { jpnModule } from './jpn/alphabet';
+import { korModule } from './kor/alphabet';
+import { hitModule } from './hit/alphabet';
 
-// Pour ajouter une langue : créer data/<lang>/alphabet.ts qui exporte un LanguageModule,
-// puis l'ajouter ci-dessous. Aucune autre partie de l'app ne bouge.
-const languageModules: LanguageModule[] = [jpModule, krModule];
+export const languageModules: LanguageModule[] = [jpnModule, korModule, hitModule];
 
 export function getAllAlphabets(): AlphabetDefinition[] {
   return languageModules.flatMap((mod) => mod.alphabets);
@@ -12,4 +11,8 @@ export function getAllAlphabets(): AlphabetDefinition[] {
 
 export function getAlphabetById(id: string): AlphabetDefinition | undefined {
   return getAllAlphabets().find((alphabet) => alphabet.id === id);
+}
+
+export function getLanguageModuleById(id: string): LanguageModule | undefined {
+  return languageModules.find((mod) => mod.id === id);
 }

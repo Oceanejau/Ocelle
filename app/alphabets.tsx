@@ -1,39 +1,37 @@
+
 import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
-import { languageModules, getLanguageModuleById } from '../data/registry';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { getLanguageModuleById } from '../data/registry';
 import { useI18n } from '../store/useI18n';
 import { getNextDestination } from '../utils/navigation';
 import AlphabetCard from '../components/AlphabetCard';
-import SettingsModal from '../components/SettingsModal';
 import AppHeader from '../components/AppHeader';
+import SettingsModal from '../components/SettingsModal';
 
-export default function HomeScreen() {
+export default function AlphabetsScreen() {
+  const { languageId } = useLocalSearchParams<{ languageId: string }>();
+  const language = getLanguageModuleById(languageId);
   const router = useRouter();
   const { t } = useI18n();
   const [settingsOpen, setSettingsOpen] = useState(false);
 
-  function goToLanguage(languageId: string) {
-    const language = getLanguageModuleById(languageId);
-    if (!language) return;
-
-    if (language.alphabets.length === 1) {
-      router.push(getNextDestination(language.alphabets[0].id));
-      return;
-    }
-    router.push({ pathname: '/alphabets', params: { languageId } });
-  }
+  if (!language) return null;
 
   return (
     <View style={styles.container}>
-      <AppHeader onOpenSettings={() => setSettingsOpen(true)} onOpenProfile={() => router.push('/profile')} />
+      <AppHeader onOpenSettings={() => setSettingsOpen(true)} onBack={() => router.back()} />
       <SettingsModal visible={settingsOpen} onClose={() => setSettingsOpen(false)} />
 
-      <Text style={styles.title}>{t('app.title')}</Text>
+      <Text style={styles.title}>{t(language.labelKey)}</Text>
 
       <ScrollView contentContainerStyle={styles.grid}>
-        {languageModules.map((language) => (
-          <AlphabetCard key={language.id} item={language} onPress={goToLanguage} />
+        {language.alphabets.map((alphabet) => (
+          <AlphabetCard
+            key={alphabet.id}
+            item={alphabet}
+            onPress={(id) => router.push(getNextDestination(id))}
+          />
         ))}
       </ScrollView>
     </View>

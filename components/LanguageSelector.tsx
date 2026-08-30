@@ -3,9 +3,9 @@ import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { AppLanguage } from '../i18n';
 
 const options: { id: AppLanguage; label: string }[] = [
-  { id: 'fr', label: 'Français' },
-  { id: 'en', label: 'English' },
-  { id: 'jp', label: '日本語' },
+  { id: 'fra', label: 'Français' },
+  { id: 'eng', label: 'English' },
+  { id: 'jpn', label: '日本語' },
 ];
 
 type Props = {

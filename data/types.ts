@@ -1,6 +1,3 @@
-// Types génériques utilisés par TOUS les alphabets, quel que soit le système d'écriture.
-// Ajouter une langue ne nécessite jamais de modifier ce fichier.
-
 export type LetterEntry = {
   char: string;
   romaji: string;
@@ -10,32 +7,31 @@ export type KanjiEntry = {
   kanji: string;
   onyomi: string[];
   kunyomi: string[];
-  meanings: {
-    en: string[];
-    fr: string[];
-    jp: string[];
-  };
+  meanings: { eng: string[]; fra: string[]; jpn: string[] };
   jlpt: number;
   strokeCount: number;
   radicals: string[];
   tags: string[];
 };
 
-// Union : une "entrée" de quiz peut être une simple lettre OU un kanji complet.
 export type QuizEntry = LetterEntry | KanjiEntry;
-
 export type AlphabetId = string;
 
 export type AlphabetDefinition = {
   id: AlphabetId;
-  labelKey: string; // clé i18n, jamais de texte en dur
-  preview: string; // ex: "あいう"
+  labelKey: string;
+  preview: string;
   entries: QuizEntry[];
-  themeColor: string; // "r, g, b" — utilisée pour le glow/reflet au survol
+  themeColor: string;
+  tutorialKey?: string;
+  forcedFontFamily?: string; // force une police précise (ex: "Hittite"), ignore le choix utilisateur
 };
 
 export type LanguageModule = {
-  id: string; // "jp", "kr", "cn"...
+  id: string;
+  labelKey: string;
+  preview: string;
+  themeColor: string;
   alphabets: AlphabetDefinition[];
 };
 

@@ -11,6 +11,7 @@ type ProgressState = {
   recordAnswer: (record: AnswerRecord) => Promise<void>;
   getSuccessRate: (alphabetId: AlphabetId) => number;
   getKnownCharCount: (alphabetId: AlphabetId) => number;
+  hasAnsweredCorrectly: (alphabetId: AlphabetId, char: string) => boolean;
 };
 
 export const useProgress = create<ProgressState>((set, get) => ({
@@ -21,19 +22,23 @@ export const useProgress = create<ProgressState>((set, get) => ({
     set({ records: stored ? JSON.parse(stored) : [] });
   },
 
-  recordAnswer: async (record: AnswerRecord) => {
+  recordAnswer: async (record) => {
     const records = [...get().records, record];
     await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(records));
     set({ records });
   },
 
-  getSuccessRate: (alphabetId: AlphabetId) => {
+  getSuccessRate: (alphabetId) => {
     const relevant = get().records.filter((r) => r.alphabetId === alphabetId);
     return computeWeightedSuccessRate(relevant);
   },
 
-  getKnownCharCount: (alphabetId: AlphabetId) => {
+  getKnownCharCount: (alphabetId) => {
     const correctChars = get().records.filter((r) => r.alphabetId === alphabetId && r.correct);
     return new Set(correctChars.map((r) => r.char)).size;
+  },
+
+  hasAnsweredCorrectly: (alphabetId, char) => {
+    return get().records.some((r) => r.alphabetId === alphabetId && r.char === char && r.correct);
   },
 }));
